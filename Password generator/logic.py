@@ -9,36 +9,41 @@ character_set = {
 }
 super_set = ["lower", "upper", "digits", "special"]
 
-def generate(alpha=True, special=True, upper=True, complexity="high", max_len=10):
+def generate(alpha, special, upper, complexity, max_len=10):
+    print(alpha)
+    print(special)
+    print(upper)
+    print(complexity)
+
     MAX_RETRY = 5 + max_len
     type_set = super_set.copy()
     password = ""
     if not alpha:
         type_set.clear()
         type_set = ["digits"]
-    if not special:
-        type_set.remove("special")
-    if not upper:
-        type_set.remove("upper")
-    if complexity=="high":
-        password_set = set()
-        while(len(password_set)!=10):
-            type = choice(type_set)
-            temp = choice(character_set[type])
-            password_set.add(temp)
-            # terminate possibility of infinite loop
-            if not MAX_RETRY:
-                break
-            else:
-                MAX_RETRY-=1
-        for char in password_set:
-            password+=char
-        return password
-    # no check for repetition in password
     else:
-        for i in range(max_len):
-            type = choice(type_set)
-            password += choice(character_set[type])
+        if not special:
+            type_set.remove("special")
+        if not upper:
+            type_set.remove("upper")
+        if complexity:
+            password_set = set()
+            while(len(password_set)!=max_len):
+                type = choice(type_set)
+                temp = choice(character_set[type])
+                password_set.add(temp)
+                # terminate possibility of infinite loop
+                if not MAX_RETRY:
+                    break
+                else:
+                    MAX_RETRY-=1
+            for char in password_set:
+                password+=char
+            return password
+        # no check for repetition in password
+
+    for i in range(max_len):
+        type = choice(type_set)
+        password += choice(character_set[type])
     return password
 
-print(generate(complexity="high"))
