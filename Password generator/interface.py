@@ -53,8 +53,8 @@ label_password = Label(root, text="")
 label_password.pack()
 
 print(special)
-button_generate = Button(root, text="Generate password", width=48, command=lambda : on_click(alpha=digits.get(), special=special.get(), upper=upper.get(), complexity=complexity.get(), max_len=int(entry_len.get())))
-# button_generate = Button(root, text="Generate password", width=48, command=generate)
+button_generate = Button(root, text="Generate password", 
+                         width=48, command=lambda : on_click(alpha=digits.get(), special=special.get(), upper=upper.get(), complexity=complexity.get(), max_len=int(entry_len.get())))
 
 button_generate.pack()
 root.mainloop()
